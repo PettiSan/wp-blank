@@ -1,0 +1,75 @@
+version: 0.0
+os: linux
+files:
+        - source: /
+          destination: /var/www/html
+permissions:
+        - object: /var/www/html
+          pattern: "*wp-content*"
+          mode: 755
+          type:
+            - directory
+        - object: /var/www/html/wp-content
+          pattern: "*plugins*"
+          mode: 777
+          type:
+            - directory
+        - object: /var/www/html/wp-content
+          pattern: "*cache*"
+          mode: 777
+          type:
+            - directory
+        - object: /var/www/html/wp-content/cache
+          pattern: "**"
+          mode: 777
+          type:
+            - directory            
+        - object: /var/www/html/wp-content
+          pattern: "*uploads*"
+          mode: 777
+          type:
+            - directory
+        - object: /var/www/html/wp-content
+          pattern: "*language*"
+          mode: 777
+          type:
+            - directory
+        - object: /var/www/html
+          pattern: ".htaccess"
+          mode: 777
+          type:
+            - file
+        - object: /var/www/html/wp-content
+          pattern: "wp-cache-config.php"
+          mode: 777
+          type:
+            - file
+        - object: /var/www/html/wp-content
+          pattern: "*wflogs*"
+          mode: 777
+          type:
+            - directory
+        - object: /var/www/html/wp-content/wflogs
+          pattern: "**"
+          mode: 777
+          type:
+            - directory
+        - object: /var/www/html/wp-content/wflogs
+          pattern: "**"
+          mode: 777
+          type:
+            - file
+        - object: /var/www/html/wp-content/plugins
+          pattern: "**"
+          mode: 777
+          type:
+            - directory
+        - object: /var/www/html/wp-content/plugins
+          pattern: "**"
+          mode: 777
+          type:
+            - file
+hooks:
+        AfterInstall:
+                - location: hooks/after-install.sh
+                  runas: root
